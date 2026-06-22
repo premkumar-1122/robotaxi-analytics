@@ -1,0 +1,260 @@
+
+<style>
+  .section { margin: 0 0 2rem; }
+  .section-title { font-size: 18px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 1rem; border-bottom: 0.5px solid var(--color-border-tertiary); padding-bottom: 8px; }
+  .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 14px 16px; }
+  .metric-label { font-size: 12px; color: var(--color-text-secondary); margin: 0 0 4px; }
+  .metric-value { font-size: 22px; font-weight: 500; color: var(--color-text-primary); margin: 0; }
+  .metric-sub { font-size: 11px; color: var(--color-text-tertiary); margin: 2px 0 0; }
+  .findings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .finding-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; }
+  .finding-card .tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 99px; margin-bottom: 8px; }
+  .tag-info { background: var(--color-background-info); color: var(--color-text-info); }
+  .tag-warn { background: var(--color-background-warning); color: var(--color-text-warning); }
+  .tag-danger { background: var(--color-background-danger); color: var(--color-text-danger); }
+  .tag-success { background: var(--color-background-success); color: var(--color-text-success); }
+  .finding-card h3 { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 6px; }
+  .finding-card p { font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.6; }
+  .entity-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .entity-row:last-child { border-bottom: none; }
+  .entity-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); min-width: 160px; }
+  .bar-wrap { flex: 1; background: var(--color-border-tertiary); border-radius: 4px; height: 8px; overflow: hidden; }
+  .bar-fill { height: 8px; border-radius: 4px; }
+  .bar-blue  { background: #378ADD; }
+  .bar-teal  { background: #1D9E75; }
+  .bar-amber { background: #BA7517; }
+  .bar-coral { background: #D85A30; }
+  .bar-purple{ background: #7F77DD; }
+  .entity-count { font-size: 12px; color: var(--color-text-secondary); min-width: 28px; text-align: right; }
+  .cat-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .cat-table th { text-align: left; font-weight: 500; font-size: 12px; color: var(--color-text-secondary); padding: 6px 8px; border-bottom: 0.5px solid var(--color-border-secondary); }
+  .cat-table td { padding: 7px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); }
+  .cat-table tr:last-child td { border-bottom: none; }
+  .pill { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 99px; }
+  .pill-info { background: var(--color-background-info); color: var(--color-text-info); }
+  .pill-warn { background: var(--color-background-warning); color: var(--color-text-warning); }
+  .pill-danger { background: var(--color-background-danger); color: var(--color-text-danger); }
+  .pill-neutral { background: var(--color-background-secondary); color: var(--color-text-secondary); }
+  .alert-box { border-left: 3px solid; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; padding: 10px 14px; margin-bottom: 10px; }
+  .alert-warn { border-color: var(--color-border-warning); background: var(--color-background-warning); }
+  .alert-danger { border-color: var(--color-border-danger); background: var(--color-background-danger); }
+  .alert-info { border-color: var(--color-border-info); background: var(--color-background-info); }
+  .alert-box p { font-size: 13px; margin: 0; line-height: 1.6; color: var(--color-text-primary); }
+  .alert-box .alert-title { font-size: 13px; font-weight: 500; margin: 0 0 3px; }
+</style>
+
+<div style="padding: 1rem 0 0;">
+
+  <div class="section">
+    <div class="section-title">Overview</div>
+    <div class="metric-grid">
+      <div class="metric">
+        <p class="metric-label">Total duplicate rows</p>
+        <p class="metric-value">62</p>
+        <p class="metric-sub">across 28 incident IDs</p>
+      </div>
+      <div class="metric">
+        <p class="metric-label">Reporting entities</p>
+        <p class="metric-value">6</p>
+        <p class="metric-sub">Tesla leads with 15 IDs</p>
+      </div>
+      <div class="metric">
+        <p class="metric-label">Severity changed</p>
+        <p class="metric-value">10</p>
+        <p class="metric-sub">in 36% of groups</p>
+      </div>
+      <div class="metric">
+        <p class="metric-label">Engagement unchanged</p>
+        <p class="metric-value">100%</p>
+        <p class="metric-sub">All: Verified Engaged</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Duplicate groups by reporting entity</div>
+    <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem;">
+      <div class="entity-row">
+        <span class="entity-name">Tesla, Inc.</span>
+        <div class="bar-wrap"><div class="bar-fill bar-blue" style="width: 100%"></div></div>
+        <span class="entity-count">15</span>
+      </div>
+      <div class="entity-row">
+        <span class="entity-name">Waymo LLC</span>
+        <div class="bar-wrap"><div class="bar-fill bar-teal" style="width: 33%"></div></div>
+        <span class="entity-count">5</span>
+      </div>
+      <div class="entity-row">
+        <span class="entity-name">Avride Inc.</span>
+        <div class="bar-wrap"><div class="bar-fill bar-amber" style="width: 33%"></div></div>
+        <span class="entity-count">5</span>
+      </div>
+      <div class="entity-row">
+        <span class="entity-name">May Mobility</span>
+        <div class="bar-wrap"><div class="bar-fill bar-coral" style="width: 7%"></div></div>
+        <span class="entity-count">1</span>
+      </div>
+      <div class="entity-row">
+        <span class="entity-name">Zoox, Inc.</span>
+        <div class="bar-wrap"><div class="bar-fill bar-purple" style="width: 7%"></div></div>
+        <span class="entity-count">1</span>
+      </div>
+      <div class="entity-row">
+        <span class="entity-name">Hyundai Motor America</span>
+        <div class="bar-wrap"><div class="bar-fill bar-purple" style="width: 7%"></div></div>
+        <span class="entity-count">1</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Duplicate category breakdown</div>
+    <table class="cat-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Count</th>
+          <th>Narrative changed</th>
+          <th>Severity changed</th>
+          <th>Incident date changed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>De-redaction / PII removal only</td>
+          <td><strong>15</strong></td>
+          <td><span class="pill pill-warn">Yes</span></td>
+          <td><span class="pill pill-neutral">No</span></td>
+          <td><span class="pill pill-neutral">No</span></td>
+        </tr>
+        <tr>
+          <td>Severity upgrade + de-redaction</td>
+          <td><strong>8</strong></td>
+          <td><span class="pill pill-warn">Yes</span></td>
+          <td><span class="pill pill-danger">Yes</span></td>
+          <td><span class="pill pill-neutral">No</span></td>
+        </tr>
+        <tr>
+          <td>Narrative correction (direction/detail)</td>
+          <td><strong>2</strong></td>
+          <td><span class="pill pill-warn">Yes</span></td>
+          <td><span class="pill pill-neutral">No</span></td>
+          <td><span class="pill pill-neutral">No</span></td>
+        </tr>
+        <tr>
+          <td>Severity upgrade only</td>
+          <td><strong>2</strong></td>
+          <td><span class="pill pill-neutral">No</span></td>
+          <td><span class="pill pill-danger">Yes</span></td>
+          <td><span class="pill pill-neutral">No</span></td>
+        </tr>
+        <tr>
+          <td>Incident date correction</td>
+          <td><strong>1</strong></td>
+          <td><span class="pill pill-neutral">No</span></td>
+          <td><span class="pill pill-neutral">No</span></td>
+          <td><span class="pill pill-danger">Yes</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Key findings</div>
+    <div class="findings-grid">
+      <div class="finding-card">
+        <span class="tag tag-warn">Narratives</span>
+        <h3>Changed in 26 of 28 groups</h3>
+        <p>Most narrative changes are structural — original submissions were fully redacted ("CONFIDENTIAL BUSINESS INFORMATION") and updated versions added de-identified summaries. This is a deliberate PII-scrubbing process, not an error. The narrative content itself did not materially change in these cases.</p>
+      </div>
+      <div class="finding-card">
+        <span class="tag tag-danger">Severity</span>
+        <h3>Upgraded in 10 groups (36%)</h3>
+        <p>Severity escalations were predominantly found in Waymo filings (4 of 5 groups) and Avride (3 of 5). The most common upgrade was from "Property Damage / No Injury" to "Minor W/O Hospitalization." Notably, one Waymo report (30270-11849) escalated to "Unknown" — meaning injury status remained unresolved even at time of re-filing.</p>
+      </div>
+      <div class="finding-card">
+        <span class="tag tag-info">Dates</span>
+        <h3>Incident date unchanged in 27 of 28 groups</h3>
+        <p>Only one group (Avride 31101-14647) had an incident date discrepancy — March vs April 2026. Submission dates varied widely, with some Tesla groups filing up to 5 months apart (Aug 2025 → Dec 2025 → Mar 2026), indicating a pattern of staged re-submissions rather than one-time corrections.</p>
+      </div>
+      <div class="finding-card">
+        <span class="tag tag-success">Completeness</span>
+        <h3>All rows equally complete (score 20–21)</h3>
+        <p>No row is strictly more complete than its pair — field-fill counts are identical within every group. The "richer" version is determined by narrative quality: the latest submission with a de-identified summary is always more informative than the initial redacted placeholder, but structurally both rows carry the same columns.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Notable anomalies</div>
+    <div class="alert-box alert-danger">
+      <p class="alert-title">Severity inconsistency — Tesla 13781-11375 (4 rows)</p>
+      <p>This is the only ID with 4 duplicate filings. Two rows carry "Property Damage / No Injured" while a third carries "Minor W/ Hospitalization." The fourth row (Mar 2026 submission) reverts the narrative to a de-identified summary without resolving the severity conflict. The authoritative severity is ambiguous — deduplicate with caution.</p>
+    </div>
+    <div class="alert-box alert-danger">
+      <p class="alert-title">Severity inconsistency — Avride 31101-13612 (3 rows)</p>
+      <p>Three unique severity values appear across the same incident: "Minor W/O Hospitalization", "Property Damage / No Injured", and "No Injured Reported" — all sharing the same submission date (Jan 2026). This may indicate simultaneous corrective re-filings with a conflicting field, or a data entry error at source.</p>
+    </div>
+    <div class="alert-box alert-warn">
+      <p class="alert-title">Directional error — Zoox 30610-11847</p>
+      <p>Both filings share the same submission date, yet the narrative contradicts itself on vehicle direction: one says "southbound," the other says "eastbound." This is a factual correction embedded within an otherwise identical record — a strong signal that the later row should be treated as canonical.</p>
+    </div>
+    <div class="alert-box alert-warn">
+      <p class="alert-title">System type correction — Waymo 30270-14096</p>
+      <p>The updated filing explicitly states that the automation system was reclassified from ADAS to ADS. This is a material regulatory distinction — ADAS and ADS fall under different reporting obligations. If this field is used for filtering, the original row will misclassify this incident.</p>
+    </div>
+    <div class="alert-box alert-info">
+      <p class="alert-title">PII removal pattern — all Tesla groups (15 IDs)</p>
+      <p>Every Tesla group follows an identical pattern: initial submission fully redacted → subsequent submission(s) contain a de-identified summary beginning "This updated report does not report a new incident or make any material changes..." This is a systematic, entity-wide compliance workflow, not ad-hoc corrections. Safe to deduplicate by always keeping the latest submission date row for Tesla.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Deduplication recommendation</div>
+    <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem;">
+      <table class="cat-table">
+        <thead>
+          <tr>
+            <th>Entity</th>
+            <th>Strategy</th>
+            <th>Rationale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tesla, Inc.</td>
+            <td><span class="pill pill-info">Keep latest submission date</span></td>
+            <td style="color: var(--color-text-secondary);">Systematic de-redaction workflow; latest row always most informative</td>
+          </tr>
+          <tr>
+            <td>Waymo LLC</td>
+            <td><span class="pill pill-danger">Keep latest + verify severity</span></td>
+            <td style="color: var(--color-text-secondary);">Severity upgrades are confirmed updates; latest row has the correct value</td>
+          </tr>
+          <tr>
+            <td>Avride Inc.</td>
+            <td><span class="pill pill-danger">Manual review required</span></td>
+            <td style="color: var(--color-text-secondary);">3 groups with conflicting severity across same-date rows; can't auto-resolve</td>
+          </tr>
+          <tr>
+            <td>May Mobility</td>
+            <td><span class="pill pill-danger">Keep latest + verify severity</span></td>
+            <td style="color: var(--color-text-secondary);">Severity changed from None → Minor; later submission is correct</td>
+          </tr>
+          <tr>
+            <td>Zoox, Inc.</td>
+            <td><span class="pill pill-warn">Keep second row (directional fix)</span></td>
+            <td style="color: var(--color-text-secondary);">Factual narrative correction; both on same date — second row is the correction</td>
+          </tr>
+          <tr>
+            <td>Hyundai Motor America</td>
+            <td><span class="pill pill-info">Keep latest submission date</span></td>
+            <td style="color: var(--color-text-secondary);">De-redaction only; latest row provides actual incident narrative</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
